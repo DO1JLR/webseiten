@@ -1,0 +1,30 @@
+[submodule "roles/packages"]
+	path = roles/packages
+	url = https://github.com/chaos-bodensee/role-base_packages.git
+[submodule "roles/ssh-auth"]
+	path = roles/ssh-auth
+	url = https://github.com/chaos-bodensee/role-ssh_authorized_keys
+[submodule "roles/sshd"]
+	path = roles/sshd
+	url = https://github.com/chaos-bodensee/role_sshd.git
+[submodule "roles/dotfiles"]
+	path = roles/dotfiles
+	url = https://github.com/chaos-bodensee/role_dotfiles.git
+[submodule "roles/bat"]
+	path = roles/bat
+	url = https://github.com/gantsign/ansible_role_bat.git
+[submodule "roles/users"]
+	path = roles/users
+	url = https://github.com/chaos-bodensee/role-manage_users.git
+[submodule "roles/version"]
+	path = roles/version
+	url = https://github.com/roles-ansible/role-ansible_version.git
+[submodule "roles/ntp"]
+	path = roles/ntp
+	url = https://github.com/chaos-bodensee/role-ntp.git
+[submodule "roles/ranger"]
+	path = roles/ranger
+	url = https://github.com/roles-ansible/role_ranger.git
+[submodule "roles/nginx"]
+	path = roles/nginx
+	url = https://github.com/nginxinc/ansible-role-nginx.git
