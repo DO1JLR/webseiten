@@ -20,4 +20,5 @@
     - { role: nftables, tags: [default,firewall,nftables]}
 - hosts: webserver
   roles:
+    - { role: letsencrypt, tags: [web,letsencrypt]}
     - { role: nginx, tags: [web,nginx]}

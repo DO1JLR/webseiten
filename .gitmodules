@@ -34,3 +34,6 @@
 [submodule "roles/nftables"]
 	path = roles/nftables
 	url = https://gitlab.com/infra.run/public/ansible-nftables.git
+[submodule "roles/letsencrypt"]
+	path = roles/letsencrypt
+	url = https://github.com/systemli/ansible-role-letsencrypt.git

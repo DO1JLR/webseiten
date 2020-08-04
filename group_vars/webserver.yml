@@ -1,0 +1,3 @@
+---
+letsencrypt_account_email: "{{ inventory_hostname }}+letsencrypt@l3d.yt"
+letsencrypt_webserver_groupname: webserver

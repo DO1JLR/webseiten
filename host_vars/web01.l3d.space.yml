@@ -1,0 +1,9 @@
+---
+letsencrypt_cert:
+  name: web01.l3d.space
+  domains:
+    - web01.l3d.space
+  challenge: http
+  http_auth: standalone
+  services:
+    - nginx
