@@ -5,5 +5,135 @@ letsencrypt_cert:
     - web01.l3d.space
   challenge: http
   http_auth: standalone
-  services:
-    - nginx
+#  services:
+#    - nginx
+
+# webserver
+nginx_http_template_enable: true
+nginx_http_template:
+  web01_l3d.space: nginx.conf.j2
+    template_file: default.conf.j2
+    conf_file_name: web01.l3d.space.conf
+    conf_file_location: /etc/nginx/conf.d/
+    servers:
+      first:
+        listen:
+          listen_public:
+            port: 1443
+            ssl: true
+            opts:
+              - http2
+              - default_server
+        server_name: websvn.l3d.space
+        ssl:
+          cert: /etc/ssl/certs/web01.space.crt
+          key: /etc/ssl/certs/web01.space.key
+          ciphers: HIGH:!aNULL:!MD5
+          prefer_server_ciphers: true
+          session_cache: none
+          session_timeout: 5m
+          disable_session_tickets: false
+          stapling: true
+          stapling_verify: true
+          buffer_size: 16k
+          ecdh_curve: auto
+#          dhparam: /etc/ssl/dhparam-4096.pem
+        access_log:
+          - name: combined
+            location: /var/log/nginx/web01.l3d.space_access.log
+        error_log:
+          location: /var/log/nginx/web01.l3d.space_error.log
+          level: warn
+        root: /var/www/web01.l3d.space
+        autoindex: false
+        try_files: $uri $uri/index.html $uri.html =404
+        add_headers:
+          strict_transport_security:
+            name: Strict-Transport-Security
+            value: max-age=15768000; includeSubDomains
+            always: true
+
+        web_server:
+          locations:
+            default:
+              location: /
+              include_files: []
+              html_file_name: index.html
+              autoindex: false
+              auth_basic: null
+              auth_basic_user_file: null
+              try_files: $uri $uri/index.html $uri.html =404
+              client_max_body_size: 1m
+
+  default:
+    conf_file_name: default.conf
+    servers:
+      first:
+        listen:
+          listen_public:
+            port: 80
+            ssl: false
+            opts:
+              - default_server
+        server_name: web01.l3d.space
+        https_redirect: web01.l3d.space
+        access_log:
+          - name: combined
+            location: /var/log/nginx/web01.l3d.space_80_access.log
+        error_log:
+          location: /var/log/nginx/web01.l3d.space_80_error.log
+          level: warn
+        root: /var/www/websvn
+        autoindex: false
+        try_files: $uri $uri/index.html $uri.html =404
+
+
+
+
+http_settings:
+  access_log_format:
+      - name: main
+        format: |
+          '$remote_addr - $remote_user [$time_local] "$request" '
+          '$status $body_bytes_sent "$http_referer" '
+          '"$http_user_agent" "$http_x_forwarded_for"'
+    access_log_location:
+     - name: main
+       location: /var/log/nginx/access.log
+    keepalive_timeout: 65
+    cache: false
+    rate_limit: false
+    keyval: false
+    server_tokens: "off"
+  sub_filter:
+    # sub_filters: []
+    last_modified: "off"
+    once: "on"
+    types: "text/html"
+  http_global_autoindex: false
+  custom_options:
+    - master_process on;
+  http_custom_options:
+    - aio off;
+  http_custom_includes:
+    - "/etc/nginx/sites-enabled/*.conf"
+  events_custom_options:
+    - accept_mutex off;
+  stream_enable: true
+
+nginx_status_enable: true
+nginx_status_port: 8080
+nginx_status_log: true
+
+nginx_logrotate_conf_enable: true
+  nginx_logrotate_conf:
+    paths:
+      - "/var/log/nginx/*.log"
+    options:
+      - daily
+      - missingok
+      - rotate 14
+      - compress
+      - delaycompress
+      - notifempty
+      - sharedscripts
