@@ -31,3 +31,6 @@
 [submodule "files/admin_ssh_keys"]
 	path = files/admin_ssh_keys
 	url = https://gitea.see-base.de/toolbox/ssh-public-keys.git
+[submodule "roles/nftables"]
+	path = roles/nftables
+	url = https://gitlab.com/infra.run/public/ansible-nftables.git
