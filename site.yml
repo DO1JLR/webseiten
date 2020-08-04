@@ -1,0 +1,23 @@
+---
+- name: check if ansible is not to old
+  hosts: localhost
+  tags:
+   - default
+  roles:
+    - version
+  gather_facts: no
+
+- hosts: all
+  roles:
+    - { role: packages, tags: [defaults,base,packages]}
+    - { role: ranger, tags: [defaults,base,ranger]}
+    - { role: ntp, tags: [defaults,base,ntp]}
+    - { role: bat, tags: [defaults,base,bat]}
+    - { role: dotfiles, tags: [defaults,base,dotfiles]}
+    - { role: ssh-auth, tags: [defaults,base,ssh,ssh-auth]}
+    - { role: sshd, tags: [default,base,ssh,sshd]}
+    - { role: users, tags: [default,base,users]}
+
+- hosts: webserver
+  roles:
+    - { role: nginx, tags: [web,nginx]}
