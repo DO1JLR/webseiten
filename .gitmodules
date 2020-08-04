@@ -28,3 +28,6 @@
 [submodule "roles/nginx"]
 	path = roles/nginx
 	url = https://github.com/nginxinc/ansible-role-nginx.git
+[submodule "files/admin_ssh_keys"]
+	path = files/admin_ssh_keys
+	url = https://gitea.see-base.de/toolbox/ssh-public-keys.git
