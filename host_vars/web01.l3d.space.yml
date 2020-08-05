@@ -12,7 +12,7 @@ letsencrypt_cert:
 nginx_http_template_enable: true
 nginx_http_template:
   web01_l3d.space: nginx.conf.j2
-    template_file: default.conf.j2
+    template_file: http/default.conf.j2
     conf_file_name: web01.l3d.space.conf
     conf_file_location: /etc/nginx/conf.d/
     servers:
