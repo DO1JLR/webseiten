@@ -9,14 +9,14 @@
 
 - hosts: all
   roles:
-    - { role: packages, tags: [defaults,base,packages]}
-    - { role: ranger, tags: [defaults,base,ranger]}
     - { role: ntp, tags: [defaults,base,ntp]}
-    - { role: bat, tags: [defaults,base,bat]}
+    - { role: users, tags: [default,base,users]}
+    - { role: ranger, tags: [defaults,base,ranger]}
+    - { role: packages, tags: [defaults,base,packages]}
+    - { role: bat, tags: [defaults,base,bat], become: true}
     - { role: dotfiles, tags: [defaults,base,dotfiles]}
     - { role: ssh-auth, tags: [defaults,base,ssh,ssh-auth]}
     - { role: sshd, tags: [default,base,ssh,sshd]}
-    - { role: users, tags: [default,base,users]}
     - { role: nftables, tags: [default,firewall,nftables]}
 - hosts: webserver
   roles:

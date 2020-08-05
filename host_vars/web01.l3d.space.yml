@@ -11,7 +11,7 @@ letsencrypt_cert:
 # webserver
 nginx_http_template_enable: true
 nginx_http_template:
-  web01_l3d.space: nginx.conf.j2
+  web01_l3d.space:
     template_file: http/default.conf.j2
     conf_file_name: web01.l3d.space.conf
     conf_file_location: /etc/nginx/conf.d/
@@ -92,19 +92,19 @@ nginx_http_template:
 
 http_settings:
   access_log_format:
-      - name: main
-        format: |
+    - name: main
+      format: |
           '$remote_addr - $remote_user [$time_local] "$request" '
           '$status $body_bytes_sent "$http_referer" '
           '"$http_user_agent" "$http_x_forwarded_for"'
-    access_log_location:
-     - name: main
-       location: /var/log/nginx/access.log
-    keepalive_timeout: 65
-    cache: false
-    rate_limit: false
-    keyval: false
-    server_tokens: "off"
+  access_log_location:
+   - name: main
+     location: /var/log/nginx/access.log
+  keepalive_timeout: 65
+  cache: false
+  rate_limit: false
+  keyval: false
+  server_tokens: "off"
   sub_filter:
     # sub_filters: []
     last_modified: "off"
@@ -126,14 +126,14 @@ nginx_status_port: 8080
 nginx_status_log: true
 
 nginx_logrotate_conf_enable: true
-  nginx_logrotate_conf:
-    paths:
-      - "/var/log/nginx/*.log"
-    options:
-      - daily
-      - missingok
-      - rotate 14
-      - compress
-      - delaycompress
-      - notifempty
-      - sharedscripts
+nginx_logrotate_conf:
+  paths:
+    - "/var/log/nginx/*.log"
+  options:
+    - daily
+    - missingok
+    - rotate 14
+    - compress
+    - delaycompress
+    - notifempty
+    - sharedscripts
