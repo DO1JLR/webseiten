@@ -1,3 +1,5 @@
 ---
-letsencrypt_account_email: "{{ inventory_hostname }}+letsencrypt@l3d.yt"
-letsencrypt_webserver_groupname: webserver
+# Certbot auto-renew cron job configuration (for certificate renewals).
+certbot_auto_renew_user: "nginx"
+
+certbot_admin_email: "{{ inventory_hostname }}+letsencrypt@l3d.yt"

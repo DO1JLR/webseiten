@@ -1,12 +1,10 @@
 ---
-letsencrypt_cert:
-  name: web01.l3d.space
-  domains:
-    - web01.l3d.space
-  challenge: http
-  http_auth: standalone
-#  services:
-#    - nginx
+certbot_create_if_missing: false
+certbot_create_method: standalone
+
+certbot_certs:
+ - domains:
+     - web01.l3d.space
 
 # webserver
 nginx_http_template_enable: true
@@ -24,10 +22,10 @@ nginx_http_template:
             opts:
               - http2
               - default_server
-        server_name: websvn.l3d.space
+        server_name: web01.l3d.space
         ssl:
-          cert: /etc/ssl/certs/web01.space.crt
-          key: /etc/ssl/certs/web01.space.key
+          cert: /etc/letsencrypt/live/web01.l3d.space/fullchain.pem
+          key: /etc/letsencrypt/live/web01.l3d.space/privkey.pem
           ciphers: HIGH:!aNULL:!MD5
           prefer_server_ciphers: true
           session_cache: none
@@ -83,7 +81,7 @@ nginx_http_template:
         error_log:
           location: /var/log/nginx/web01.l3d.space_80_error.log
           level: warn
-        root: /var/www/websvn
+        root: /var/www/web01.l3d.space
         autoindex: false
         try_files: $uri $uri/index.html $uri.html =404
 
