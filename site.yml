@@ -19,5 +19,5 @@
     - { role: sshd, tags: [default,base,ssh,sshd]}
 - hosts: webserver
   roles:
-    - { role: letsencrypt, tags: [web,letsencrypt]}
+    - { role: letsencrypt, tags: [web,letsencrypt], become: true}
     - { role: nginx, tags: [web,nginx]}
