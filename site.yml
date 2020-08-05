@@ -17,7 +17,6 @@
     - { role: dotfiles, tags: [defaults,base,dotfiles]}
     - { role: ssh-auth, tags: [defaults,base,ssh,ssh-auth]}
     - { role: sshd, tags: [default,base,ssh,sshd]}
-    - { role: nftables, tags: [default,firewall,nftables]}
 - hosts: webserver
   roles:
     - { role: letsencrypt, tags: [web,letsencrypt]}
